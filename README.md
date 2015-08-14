@@ -1,6 +1,15 @@
 # faddeevas
 Collection of FADDEEVA Implementations
 
+Implementations
+
+  + mit-scipy-1: scipy v >0.14
+  + mpmath-python-1: multiprecision benchmark
+  + cernlib-f90-1: cernlib as in madx, sixtrack, ptc
+  + cernlib-f90-2: cernlib as in pyheadtail
+  + cernlib-python-1: pure python implementaion 
+  + libcerf-1.4: C library
+
 
 Sources:
   + https://github.com/PyCOMPLETE/PyHEADTAIL/master/spacecharge/spacecharge.py
