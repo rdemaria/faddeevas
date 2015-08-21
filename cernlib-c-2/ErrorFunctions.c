@@ -1,12 +1,12 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 // FILE NAME
-//   ErrorFunctions.cc
+//   ErrorFunctions.c
 //
-//   02/19/2015
+//   02/19/2015, 08/18/2015
 //
 // AUTHORS
-//   Hannes Bartosik
+//   Hannes Bartosik, Adrian Oeftiger
 //
 // DESCRIPTION
 //   Error functions
@@ -14,12 +14,10 @@
 /////////////////////////////////////////////////////////////////////////////
 
 //#include <iostream>
-#include <cmath>
-#include <cfloat>
-#include <complex>
-#include <cstdlib>
+#include <math.h>
+#include <stdlib.h>
 
-std::complex<double> cerrf(std::complex<double> z)
+void cerrf(double in_real, double in_imag, double* out_real, double* out_imag)
 {
 	/**
 	this function calculates the double precision complex error function based on the
@@ -37,17 +35,17 @@ std::complex<double> cerrf(std::complex<double> z)
 	double Rx [33];
 	double Ry [33];
 
-	x = abs(real(z));
-	y = abs(imag(z));
+	x = fabs(in_real);
+	y = fabs(in_imag);
 
 	if (y < yLim && x < xLim){
 		q = (1.0 - y / yLim) * sqrt(1.0 - (x / xLim) * (x / xLim));
 		h  = 1.0 / (3.2 * q);
-		nc = 7 + int(23.0 * q);
-		xl = pow(h, 1 - nc);
+		nc = 7 + (int) (23.0 * q);
+		xl = pow(h, (double) (1 - nc));
 		xh = y + 0.5 / h;
 		yh = x;
-		nu = 10 + int(21.0 * q);
+		nu = 10 + (int) (21.0 * q);
 		Rx[nu] = 0.;
 		Ry[nu] = 0.;
 		for (n = nu; n > 0; n--){
@@ -84,13 +82,13 @@ std::complex<double> cerrf(std::complex<double> z)
 		Wy = constant * Ry[0];
 	}
 	if (y == 0.) {Wx = exp(-x * x);}
-	if (imag(z) < 0.){
+	if (in_imag < 0.){
 		Wx =   2.0 * exp(y * y - x * x) * cos(2.0 * x * y) - Wx;
 		Wy = - 2.0 * exp(y * y - x * x) * sin(2.0 * x * y) - Wy;
-		if (real(z) > 0.) {Wy = -Wy;}
+		if (in_real > 0.) {Wy = -Wy;}
 	}
-	else if (real(z) < 0.) {Wy = -Wy;}
+	else if (in_real < 0.) {Wy = -Wy;}
 
-	//std::cout<<" debug Wx="<<Wx<<", Wy="<<Wy<<std::endl;
-	return std::complex<double> (Wx, Wy);
+	*out_real = Wx;
+	*out_imag = Wy;
 }
