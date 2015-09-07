@@ -10,7 +10,7 @@
 //   FADDEEVA error function for GPU in CUDA.
 //   This file is intended to be used as a
 //   preamble to depending kernels, e.g. in PyCUDA
-//   via ElementwiseKernel(..., preamble=open( <this_file> )).
+//   via ElementwiseKernel(..., preamble=open( <this_file> ).read()).
 //
 /////////////////////////////////////////////////////////////////////////////
 
