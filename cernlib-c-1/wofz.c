@@ -1,7 +1,5 @@
 #include <math.h>
 
-
-
 void errf( double *var_xx, double *var_yy, double *var_wx, double *var_wy )
 {
     int n, nc, nu;
@@ -16,8 +14,12 @@ void errf( double *var_xx, double *var_yy, double *var_wx, double *var_wy )
     wx = *var_wx;
     wy = *var_wy;
 
-    x = abs(xx);
-    y = abs(yy);
+    // Adrian Oeftiger 07.09.2015: replaced abs by fabs... ?
+    // x = abs(xx);
+    // y = abs(yy);
+
+    x = fabs(xx);
+    y = fabs(yy);
     if(y < ylim && x < xlim )
     {
         q = ( 1.0 - y / ylim ) * sqrt( 1.0 - ( x / xlim )*( x / xlim ) );
@@ -51,7 +53,10 @@ void errf( double *var_xx, double *var_yy, double *var_wx, double *var_wy )
         }
 
         wx = cc * sx;
-        wy = xx * sy;
+        // Adrian Oeftiger 07.09.2015: replaced xx by cc... ?
+        // wy = xx * sy;
+
+        wy = cc * sy;
 
     }
     else
@@ -65,7 +70,9 @@ void errf( double *var_xx, double *var_yy, double *var_wx, double *var_wy )
         {
             tx = xh + (double)(n) * rx[0];
             ty = yh - (double)(n) * ry[0];
-            tn = tx*tx;
+            // Adrian Oeftiger 07.09.2015: added ty*ty... ?
+            // tn = tx*tx;
+            tn = tx*tx + ty*ty;
             rx[0] = ( 0.5 * tx ) / tn;
             ry[0] = ( 0.5 * ty ) / tn;
         }
