@@ -13,9 +13,7 @@
 //
 /////////////////////////////////////////////////////////////////////////////
 
-//#include <iostream>
 #include <math.h>
-#include <stdlib.h>
 
 void cerrf(double in_real, double in_imag, double* out_real, double* out_imag)
 {
